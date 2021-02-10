@@ -8,9 +8,7 @@ import argparse
 import re
 import logging
 from igraph import *
-import labelprop
-import BidirectionalMap
-from src.labprop.LabelPropagation import lp1, lp2
+from labprop.LabelPropagation import lp1, lp2
 
 
 
@@ -45,10 +43,10 @@ ap.add_argument("--binned", required=True,
                 help="path to the file with the initial binning output")
 ap.add_argument("--output", required=True, help="path to the output folder")
 ap.add_argument("--prefix", required=True, help="prefix for the output file")
-ap.add_argument("--max_iteration", required=True, type=int,
+ap.add_argument("--max_iteration", required=False, type=int, default=20,
                 help="maximum number of iterations for label propagation algorithm. [default: 20]")
-ap.add_argument("--lp_version", required=True, type=int,
-                help="Type 1 if you want to propagate with lp-v1, type 2 if you prefer to use lp-v2")
+ap.add_argument("--lp_version", required=False, type=int, default=1,
+                help="Type 1 if you want to propagate with lp-v1, type 2 if you prefer to use lp-v2. [default 1]")
 args = vars(ap.parse_args())
 
 sgafile = args["graph"]
@@ -276,6 +274,8 @@ for read in range(node_count):
 
 
     line.append(neighs)
+    if labprop_v == 2:
+        line.append(0)
     data.append(line)
 
 
@@ -284,12 +284,11 @@ logger.info("Starting label propagation")
 # The propagation at each iteration is performed from the last labelled nodes to their neighbors
 # Once a node is labbeled , that label is not going to be changed
 try:
-  if labprop_v == 1:
-    pl1(max_iteration, data)
-  else
-    pl2(max_iteration, data)
 
-
+    if labprop_v == 1:
+        lp1(max_iteration, data)
+    else:
+        lp2(max_iteration, data)
 
 except:
     logger.error("Please make sure that you inserted the correct parameter for the lp version (either 1 or 2)")

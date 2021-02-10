@@ -14,10 +14,10 @@ It's possible to download ClassGraph by cloning the repository in your machine.
 git clone https://github.com/MargheritaCavattoni/ClassGraph.git
 ```
 ## Installation
-The istallation of ClassGraph requires python 3.6 or above. Besides the following dependency is needed:
+The istallation of ClassGraph requires python 3.7 or above. Besides the following dependency is needed:
 * [python-igraph](https://igraph.org/python/)
 
-### Installing with Conda
+### Setting the environment with Conda
 It's possible to use [Conda](https://docs.conda.io/en/latest/) in order to set-up the proper environment of ClassGraph. [Anaconda](https://www.anaconda.com/distribution/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html) contain Conda.
 
 In order to create the Conda environment and activate it run the following commands:
@@ -36,11 +36,11 @@ One possible tool that satisfies these requirements is [**SGA**](https://github.
 ### Binning Tools
 ClassGraph requires as input the result of the classification process presented as follows:
 ```
-NODE_1,L1
-NODE_2,L1
-NODE_3,L1
-NODE_4,L2
-NODE_5,L2
+NODE.1  L1
+NODE.2  L1
+NODE.3  L1
+NODE.4  L2
+NODE.5  L2
 ...
 ```
 Where NODE_i is the node ID and Li represents its label. Li must be equal to 0 if the read wasn't classified.
@@ -49,11 +49,21 @@ Hypothetically any metagenomic binning tool could be used for the classification
 ## Usage Example
 In order to run ReadGraph it's necessary to type on the terminal a command structured as follows:
 ```
-python3 ClassGraph.py --graph $Assembler_DIR/Graph.asqg --output $ClassGraph_Output_DIR/ --binned $Classifier_DIR/BinnedReads.out --preﬁx example1 --max_iteration 20
+python3 ClassGraph.py --graph $Assembler_DIR/Graph.asqg --output $ClassGraph_Output_DIR/ --binned $Classifier_DIR/BinnedReads.out --preﬁx example1 --max_iteration 20 --lp_version 1
 ```
 Where:
-* --graph           path to the graph file (asgg)
-* --output          path to the folder where we want to store the output
-* --binned          path to the file that stores the result of the initial classification with a preexisting binning tool
-* --prefix          name of the output file
-* --max_iteration   maximum number of iterations in the label propagation algorithm
+```
+--graph           path to the graph file (asqg)
+--output          path to the folder where we want to store the output
+--binned          path to the file that stores the result of the initial classification with a preexisting binning tool
+--prefix          name of the output file
+--max_iteration   maximum number of iterations in the label propagation algorithm (default: 20)
+--lp_version      version of the label propagation algorithm to use (1 or 2, default: 1)
+```
+## Getting help
+If you encounter bugs or have further questions or requests, you can raise an issue at the issue page. You can also contact Margherita Cavattoni at cavattonimargherita@gmail.com
+
+## Citation
+M. Cavattoni, M. Comin,
+*"Boosting Metagenomic Classification with Reads Overlap Graph"*,
+under submission at the [7th-8th International Conference on Algorithms for Computational Biology](https://irdta.eu/alcob2020-2021/)

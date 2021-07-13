@@ -4,7 +4,7 @@ ClassGraph is a tool that classifies metagenomic reads starting from the output 
 Current technologies allow the sequencing of microbial communities directly from the environment without prior culturing. One of the major problems when analyzing a microbial sample is to taxonomically annotate its reads to identify the species it contains. Most of the methods currently available focus on the classification of reads using a set of reference genomes and their k-mers. While in terms of precision these methods have reached percentages of correctness close to perfection, in terms of recall (the actual number of classified reads) the performances fall at around 50%. One of the reasons is the fact that the sequences in a sample can be very different from the corresponding reference genome. To address this issue, we propose ClassGraph, a new binning  method  that  makes  use  of  the  reads  overlap  graph  and  applies  a label propagation algorithm to refine the binning result of existing tools.
 
 <p align="center">
-  <img src="Images/GeneralschemeBig.png" width="600" title="ClassGraph workflow" alt="ClassGraph workflow">
+  <img src="Images/Generalscheme.png" width="600" title="ClassGraph workflow" alt="ClassGraph workflow">
 </p>
 
 ## ClassGraph Download
@@ -44,7 +44,7 @@ NODE.5  L2
 ...
 ```
 Where NODE_i is the node ID and Li represents its label. Li must be equal to 0 if the read wasn't classified.
-Hypothetically any metagenomic binning tool could be used for the classification. During the testing we decided to use [**kraken2**](https://github.com/DerrickWood/kraken2.git), since it's one of the best performing.
+Hypothetically any metagenomic binning tool could be used for the classification. 
 
 ## Usage Example
 In order to run ReadGraph it's necessary to type on the terminal a command structured as follows:
@@ -66,4 +66,4 @@ If you encounter bugs or have further questions or requests, you can raise an is
 ## Citation
 M. Cavattoni, M. Comin,
 *"Boosting Metagenomic Classification with Reads Overlap Graph"*,
-under submission at the [7th-8th International Conference on Algorithms for Computational Biology](https://irdta.eu/alcob2020-2021/)
+under submission.
